@@ -26,8 +26,8 @@ async function start() {
 
         return selectedPrefixText
     }*/
-    /*robots.input()
-    await robots.text()*/
+    robots.input()
+    await robots.text()
     await robots.image()
 
     const content = robots.state.load()
