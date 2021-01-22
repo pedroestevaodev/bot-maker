@@ -11,11 +11,11 @@ function robot() {
     state.save(content)
     
     function askAndReturnSearchTerm() {
-        return readline.question('Type a Wikipedia search term: ')
+        return readline.question('Buscar o termo na Wikipedia: ')
     }
     function askAndReturnPrefix() {
         const prefixes = ['Who is','What is','The history of']
-        const selectedPrefixIndex = readline.keyInSelect(prefixes, 'Choose one option: ')
+        const selectedPrefixIndex = readline.keyInSelect(prefixes, 'Escolha uma opção: ')
         const selectedPrefixText = prefixes[selectedPrefixIndex]
     
         return selectedPrefixText

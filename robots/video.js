@@ -1,12 +1,14 @@
-const gm = require('../node_modules/gm').subClass({ imageMagick: true })
+const gm = require('gm').subClass({ imageMagick: true })
 const state = require('./state.js')
 const spawn = require('child_process').spawn
 const path = require('path')
 const rootPath = path.resolve(__dirname, '..')
 const hbjs = require('handbrake-js')
 const fs = require('fs')
+const fromRoot = relPath => path.resolve(rootPath, relPath)
 
 async function robot() {
+    console.log('> [BOT-Vídeo] Iniciando...')
     const content = state.load()
 
     await convertAllImages(content)
@@ -54,7 +56,7 @@ async function robot() {
                     if (error) {
                         return reject(error)
                     }
-                    console.log(`> Image converted: ${inputFile}`)
+                    console.log(`> [BOT-Vídeo] Imagem convertida: ${inputFile}`)
                     resolve()
                 })
         })
@@ -68,7 +70,7 @@ async function robot() {
 
     async function createAllSentenceImage(sentenceIndex, sentenceText) {
         return new Promise((resolve, reject) => {
-            const outputFile = `./content/${sentenceIndex}-sentence.png`
+            const outputFile = fromRoot(`./content/${sentenceIndex}-sentence.png`)
 
             const templateSettings = {
                 0: {
@@ -112,7 +114,7 @@ async function robot() {
                     if (error) {
                         return reject(error)
                     }
-                    console.log(`> Sentence created: ${outputFile}`)
+                    console.log(`> [BOT-Vídeo] Sentença criada: ${outputFile}`)
                     resolve()
                 })
         })
@@ -121,12 +123,12 @@ async function robot() {
     async function createYouTubeThumbnail() {
         return new Promise((resolve, reject) => {
             gm()
-                .in('./content/0-converted.png')
-                .write('./content/youtube-thumbnail.jpg', (error) => {
+                .in(fromRoot('./content/0-converted.png'))
+                .write(fromRoot('./content/youtube-thumbnail.jpg'), (error) => {
                     if (error) {
                         return reject(error)
                     }
-                    console.log('> Creating YouTube thumbnail')
+                    console.log('> [BOT-Vídeo] Criando thumbnail do vídeo')
                     resolve()
                 })
         })
@@ -139,11 +141,11 @@ async function robot() {
     async function renderVideoWithAfterEffects() {
         return new Promise((resolve, reject) => {
             const aerenderFilePath = '/Program Files/Adobe/Adobe After Effects 2020/Support Files/aerender.exe'
-            const templateFilePath = `${rootPath}/templates/1/template.aep`
-            const destinationFilePath = `${rootPath}/content/output.mov`
-            const destinationFilePathConverted = `${rootPath}/content/output.mp4`
-
-            console.log('> Starting After Effects')
+            const templateFilePath = fromRoot('./templates/1/template.aep')
+            const destinationFilePath = fromRoot('./content/output.mov')
+            const destinationFilePathConverted = fromRoot('./content/output.mp4')
+            
+            console.log('> [BOT-Vídeo] Iniciando After Effects...')
 
             const aerender = spawn(aerenderFilePath, [
                 '-comp', 'main',
@@ -156,32 +158,28 @@ async function robot() {
             })
 
             aerender.on('close', () => {
-                console.log('> After Effects closed')
-                console.log("> [video-robot] Convert to .mp4")
+                console.log('> [BOT-Vídeo] After Effects fechado! !')
+                console.log("> [BOT-Vídeo] Convertendo para .mp4")
                 hbjs
                     .spawn({
                         input: destinationFilePath,
                         output: destinationFilePathConverted
                     })
                     .on("error", err => {
-                        // invalid user input, no video found etc
-                        console.error(`> [video-robot] Error found while trying to convert video: ${err}`)
+                        console.error(`> [BOT-Vídeo] Erro encontrado ao tentar converter o vídeo: ${err}`)
                     })
                     .on("complete", progress => {
-                        console.log("> [video-robot] Encoding finished successfully");
-                        //remove big MOV file
+                        console.log("> [BOT-Vídeo] Codificação concluída com sucesso! !");
                         fs.unlinkSync(destinationFilePath, err => {
                             if (err) {
-                                console.error(`> [video-robot] Error removing .mov file: ${err}`)
+                                console.error(`> [BOT-Vídeo] Erro ao tentar remorver o arquivo .mov: ${err}`)
                             }
-                            console.log(`> [video-robot] output.MOV removed.`)
+                            console.log(`> [BOT-Vídeo] output.MOV removido.`)
                         })
                         resolve()
                     })
             })
         })
     }
-
-
 }
 module.exports = robot
