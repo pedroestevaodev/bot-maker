@@ -33,5 +33,30 @@ Este projeto é inspirado na série do Felipe Deschamps e combina várias tecnol
 ## Instalação
 
 1. Clone este repositório:
+   
    ```bash
    git clone https://github.com/seu-usuario/youtube-video-automation-bot.git
+
+2. Instale as dependências:
+   
+   ```bash
+   npm install
+   
+3. Configure suas credenciais de API no arquivo .env:
+
+## Como Usar
+
+1. Execute o bot:
+   
+   ```bash
+   npm start
+
+2. O bot coletará automaticamente dados, criará o vídeo e o fará o upload para seu canal do YouTube.
+
+## Contribuição
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e enviar pull requests.
+
+## Licença
+
+Este projeto está licenciado sob a MIT License.
