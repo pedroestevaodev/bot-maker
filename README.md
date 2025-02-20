@@ -1,5 +1,11 @@
 # YouTube Video Automation Bot
 
+<p style="text-align: center;">
+    <a href="https://www.pedroestevao.com">
+        <img src="https://res.cloudinary.com/dge3g9rcw/image/upload/v1740089731/github/lhl9qlfjt914igxz2dl9.webp" alt="Repository illustration" />
+    </a>
+</p>
+
 Este projeto é inspirado na série do Felipe Deschamps e combina várias tecnologias para criar um bot que gera e faz upload automático de vídeos para o YouTube. Utilizando **IBM Watson**, **Adobe After Effects**, **Wikipedia**, **Google Images API**, **Algorithmia**, **JavaScript** e **Node.js**, este bot executa as seguintes tarefas de forma automatizada:
 
 - Coleta de textos da Wikipedia.
