@@ -1,21 +1,25 @@
 {
   "name": "bot-maker",
   "version": "1.0.0",
-  "description": "Projeto para criar vídeos automatizados, e quem sabe o que mais...",
+  "description": "Project to create automated videos, and who knows what else...",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Wizard-Anorak/bot-maker.git"
+    "url": "git+https://github.com/Pedro-Estevao/bot-maker.git"
   },
-  "author": "",
+  "author": {
+    "name": "Pedro Estevão",
+    "email": "pedropaulista11@gmail.com",
+    "url": "https://www.pedroestevao.com"
+  },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Wizard-Anorak/bot-maker/issues"
+    "url": "https://github.com/Pedro-Estevao/bot-maker/issues"
   },
-  "homepage": "https://github.com/Wizard-Anorak/bot-maker#readme",
+  "homepage": "https://github.com/Pedro-Estevao/bot-maker#readme",
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.0.20",
     "@ffprobe-installer/ffprobe": "^1.1.0",
