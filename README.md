@@ -41,7 +41,7 @@ This project is inspired by **Filipe Deschamps' series** and combines multiple t
 1. Clone this repository:  
 
    ```bash  
-   git clone https://github.com/Pedro-Estevao/bot-maker.git
+   git clone https://github.com/pedroestevaodev/bot-maker.git
    cd bot-maker
    ```  
 
